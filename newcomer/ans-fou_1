@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<!--这货有bug之后再填坑-->
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>慢慢变大</title>
+
+	<script type="text/javascript">
+	var button_height=200//此值可该；设定图变到的最大高度
+  	var button_width=200//此值可改；设定图变到的最大宽度
+  	var oldWidth = 100
+  	var oldHeight = 50
+	var sh
+	var k=10       //图一次变大的值，此值越大，图变大的越快
+	var timer1=15  //图多长时间变化一次，值些小，变化越快
+	var flage = 0;
+	function  timeOmover(){    
+		if(flage == 0) sh=setInterval("Omover()",timer1);
+	}
+	function timeOmout() {
+		if(flage == 1) sh=setInterval("Omout()",timer1);
+	}
+	function Omover() {
+
+
+		var abtn=document.getElementById('BUTTON1');
+		if (parseInt(abtn.style.width) >=  button_width || parseInt(abtn.style.height) >=  button_height){
+			flage = 1
+   		 	clearInterval(sh)
+  		}
+		var oldW = parseInt(abtn.style.width)
+		var oldH = parseInt(abtn.style.height)
+		var j = oldW/oldH
+		abtn.style.width =  (oldW  + j*k) + 'px'
+		abtn.style.height =  (oldH  + k) + 'px'
+		
+	}
+
+	function Omout() {
+		var abtn=document.getElementById('BUTTON1');
+		if (flage && parseInt(abtn.style.width) ==  oldWidth || parseInt(abtn.style.height) ==  oldHeight){
+			flage = 0
+   		 	clearInterval(sh)
+  		}
+		var oldW = parseInt(abtn.style.width)
+		var oldH = parseInt(abtn.style.height)
+		var j=oldW/oldH;
+		abtn.style.width =  (oldW  - j*k) + 'px'
+		abtn.style.height =  (oldH  - k) + 'px'
+	}
+
+	</script>
+
+</head>
+
+<body>
+
+
+<button id="BUTTON1" onmouseover="timeOmover()" onmouseout="timeOmout()" style="width:100px; height:50px">
+	有bug
+</button>
+
+
+</body>
+
+</html>
+
