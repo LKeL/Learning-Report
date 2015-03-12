@@ -1,0 +1,40 @@
+1--样例写在外头"DOM如何停止消息传递",其实就是有消息注册就要addEventListener和attachEvent,那么删除事件响应则removeEventListener及detachEvent
+
+2--因为事件可以在各层级的节点中传递, 不管是冒泡还是捕获, 有时我们希望事件在特定节点执行完之后不再传递, 可以使用事件对象的 stopPropagation() 方法.假设页面上存在一个浮动弹出层, 显示在最前面, 当点击弹出层以外页面区域时, 隐藏弹出层. 为了做到这样的效果, 我们会监听 documentElement 的 click 事件, 一旦事件被触发即隐藏弹出层. 但是这显然存在问题. 当用户点击弹出层时, 我们不希望它隐藏掉. 但因为事件的冒泡传递, documentElement 的 click 事件也会被触发. 这个时候, 我们可以监听弹出层的 click 事件, 并使用 stopPropagation() 方法阻止冒泡
+// 在弹出对话框上点击时, 不进行任何页面操作, 并阻止冒泡
+document.getElementById('dialog').onclick = function(ev) {
+	ev.stopPropagation();
+};
+ 
+// 在 documentElement 节点上监听到点击事件时, 隐藏对话框
+document.documentElement.onclick = function(ev) {
+	document.getElementById('dialog').style.display = 'none';
+};
+
+但IE8前都不能使用哟,这种情况只要把cancelBubble设置为false即可
+
+
+一个带事件监听的链接代码如下:
+<a href="http://w3c.org" onclick="alert('JavaScript Click Event');">点击链接</a>
+点击该链接, 显示对话框后跳转页面. 由此可知, 除了执行监听事件还会触发浏览器默认动作; 执行监听事件在前, 触发浏览器默认动作在后.
+
+(以下为百度提供)
+这里有个经典示例, 我希望点击链接在新窗口打开页面, 但不希望当前页面跳转. 这个时候可以使用 preventDefault() 阻止后面将要执行的浏览器默认动作.
+
+<a id="link" href="http://w3c.org">W3C 首页链接</a>
+ 
+<script>
+// 在新窗口, 打开页面
+document.getElementById('link').onclick = function(ev) {
+	// 阻止浏览器默认动作 (页面跳转)
+	ev.preventDefault();
+	// 在新窗口打开页面
+	window.open(this.href);
+};
+</script>
+
+3--就是用javascript主动派发事件,dispatchEvent()balabalabala
+
+4-- mouseover,mousemove....BALABALA??这个我再去看看隐隐约约感到没这么简单
+
+5-- DOM event flow有三个phase，capture、target和bubble,一般capture不做处理,即addEventListener(type, listener, useCapture)时，useCapture设为false,偶尔可能会使用所谓捕获事件监听器（Capturing Event Listeners），即useCapture设为true         这类经验性的东西我也只能去多练积累
