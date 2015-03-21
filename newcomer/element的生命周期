@@ -6,7 +6,9 @@ ready 该<polymer-element>已经完全准备好了(如 shadow DOM已经被创建
 
 attached 一个element的实例被插入到DOM中
 
-domReady 当element的子元素初始化设置确保存在时被调用。这是针对其element的父元素或light DOM子元素的好时机。另一个用法是当你拥有兄弟custom elements的时候(比如他们是通过.innerHTML同时写在一起的)。在element A可以使用B的API/属性之前，element B需要被升级。该domReady回调确保了这两个elements都存在
+domReady 当element的子元素初始化设置确保存在时被调用。这是针对其element的父元素或light DOM子元素的好时机。
+另一个用法是当你拥有兄弟custom elements的时候(比如他们是通过.innerHTML同时写在一起的)。
+在element A可以使用B的API/属性之前，element B需要被升级。该domReady回调确保了这两个elements都存在
 
 detached 一个实例从DOM中被移除时
 
