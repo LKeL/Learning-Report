@@ -1,0 +1,20 @@
+1、[[]]和{{}}的差别，[[]]是一次性绑定，会在polymer第一次设置其值后停止绑定
+{{}}就是动态绑定啦，[[]]可以减少资源开销
+
+2、有的吧，过滤器表达式，tokenList
+
+3、publish自定义属性及其默认值，类似attribute，reflect设定反射
+
+4、取模版中的foobar标签
+
+5、两种监视方式。如numberChanged，也可以自定义属性监视者。使用observe代码块来统一监视多个属性
+
+进阶问题
+
+1、ref可以把一个template重用在多个地方，或引用一个别处生成的template,第二问是可以直接用bind ref导入一个树形控件？
+
+2、消息？有声明式的事件映射，on—even方法，也有自定义事件，polymer提供了一个fire()的方法，比如 
+	qonClick: function() {
+        this.fire('嗷', {msg: '又伤自尊了！'}); 
+        // fire(inType, inDetail, inToNode)
+      }
