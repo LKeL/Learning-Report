@@ -10,10 +10,10 @@
 ####结构目录
 
 - newcomer
-	- shadowDom
-	- polymer API guide
-	- element
-	- homework
+	- ShadowDom
+	- Polymer API Guide
+	- Element
+	- HomeWork
 - notes
 	- coming soon
 - other
