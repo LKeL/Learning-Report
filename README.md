@@ -14,7 +14,7 @@
 	- Polymer API Guide
 	- Element
 	- HomeWork
-	- others
+	- Others
 - notes
 	- coming soon
 - others
