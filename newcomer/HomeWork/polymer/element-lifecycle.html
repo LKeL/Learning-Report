@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">  
+  <style type="text/css">
+  .css_btn_class {
+  font-size:17px;
+  font-family:Arial;
+  font-weight:normal;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  border:1px solid #dcdcdc;
+  padding:9px 18px;
+  text-decoration:none;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(34%, #ededed), color-stop(71%, #dfdfdf) );
+  background:-moz-linear-gradient( center top, #ededed 34%, #dfdfdf 71% );
+  background:-ms-linear-gradient( top, #ededed 34%, #dfdfdf 71% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+  background-color:#ededed;
+  color:#777777;
+  display:inline-block;
+  }.css_btn_class:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(34%, #dfdfdf), color-stop(71%, #ededed) );
+  background:-moz-linear-gradient( center top, #dfdfdf 34%, #ededed 71% );
+  background:-ms-linear-gradient( top, #dfdfdf 34%, #ededed 71% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+  background-color:#dfdfdf;
+  }.css_btn_class:active {
+  position:relative;
+  top:1px;
+}
+</style>
+    
+</head>
+<body>
+  <div>
+    <p>
+      问题一，见element的生命周期,里面有所有的生命周期的说明
+      <br>
+      问题二
+      <br>
+      <code>
+        Polymer({
+        <br>
+        foo: 'foo',
+        <br>
+        bar: 'bar', //这是属性么？不用publish？为什么不直接attribute？
+        <br>
+        foobar: [],
+        <br>
+        settings: {
+        <br>
+        text: 'hello foobar'
+        <br>
+        //应该在created里面创建,否则创建多个相同的element的时候可能导致共享
+        <br>
+        },
+        <br>
+        created: function () {  
+        <br>
+        },
+        <br>
+        ready: function () {
+        <br>
+        console.log('foobar ready!');
+        <br>
+        },
+        <br>
+      });
+      <code>
+    </p>
+    <a href="../finished/index.html">
+      <button class="css_btn_class">返回</button>
+    <a>  
+  </div>
+
+
+</body>
+
+</html>
+

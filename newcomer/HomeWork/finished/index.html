@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+
+  <title>homework</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script type="../components/platform/platform.js"></script>
+  <link href="../components/font-roboto/roboto.html" rel="import">
+  <link href="../components/core-icon/core-icon.html" rel="import">
+  <link href="../components/core-icons/core-icons.html" rel="import">
+  <link href="../components/paper-button/paper-button.html" rel="import"> </link>
+
+  <style shim-shadowdom>
+    a {
+      color: #FFAA00;
+      text-decoration:none;
+    }
+    a:hover {
+      color: #8DB6CD;
+      text-decoration:none;
+    }
+    a:active {
+      color: #87CEFF;
+      text-decoration:none;
+    } 
+    body {
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      font-size: 14px;
+      margin: 0;
+      padding: 24px;
+
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-touch-callout: none;
+    }
+
+    section {
+      text-align: center;
+    }
+
+    section > div {
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    paper-button.colored {
+      color: #4285f4;
+    }
+
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    paper-button.custom > core-icon {
+      margin-right: 4px;
+    }
+
+    paper-button.hover:hover {
+      background: #eee;
+    }
+
+    paper-button.blue-ripple::shadow #ripple {
+      color: #4285f4;
+    }
+
+  </style>
+</head>
+
+<body>
+  <template is="auto-binding">
+    <div id="clicker" on-tap="{{clickAction}}" >
+      <section>
+        <div> 
+          <h2>对应wiki中的作业顺序</h2>
+        </div>
+        <a href="../polymer/element-lifecycle.html">
+          <paper-button raised>生命周期</paper-button>
+        </a>
+        <paper-button raised class="colored">数据绑定</paper-button>
+        <paper-button raised>定义样式</paper-button>
+        <paper-button raised class="colored">扩展已有元素</paper-button>
+      </section>
+     </div>
+    </template>
+  <script>
+    function clickAction(e) {
+      var t = e.target;
+      if (t.localName === 'paper-button') {
+        if (t.hasAttribute('disabled')) {
+          console.error('should not be able to click disabled button', t);
+        } else {
+          console.log('click', t);
+
+        }
+      }
+    }
+
+    addEventListener('template-bound', function(e) {
+      e.target.clickAction = clickAction;
+    });
+  </script>
+
+
+</body>
+</html>
