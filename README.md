@@ -13,6 +13,7 @@
 	- shadowDom
 	- polymer API guide
 	- element
+	- homework
 - notes
 	- coming soon
 - other
