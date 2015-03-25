@@ -1,5 +1,19 @@
-# Learning-Report
+#Learning-Reporting
 
-学习自用~
+**这是自己在火盒科技公司实习时的学习报告**
 
-newcomer里面为公司的learning-report
+
+
+
+
+
+####结构目录
+
+- newcomer
+	- shadowDom
+	- polymer API guide
+	- element
+- notes
+	- coming soon
+- other
+	- coming soon
