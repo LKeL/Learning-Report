@@ -1,0 +1,56 @@
+<link rel="import"
+      href="bower_components/polymer/polymer.html">
+
+<polymer-element name="age-slider" attributes="name settings color">
+  <template>
+    This is <b>{{color}}</b>'s age-slider.
+    <b>{{name}}</b> lets me borrow it.
+    He likes the color <span style="color: {{color}}">{{color}}</span>.
+    I am <b>{{age}}</b> years old.
+    <p><label for="ageInput">Age:</label>
+    <input id="ageInput" type="range"
+           value="{{age}}">
+    <label for="nameInput">Name:</label>
+    <input id="nameInput" value="{{name}}"
+           placeholder="Enter name..."></p>
+  </template>
+  <script>
+    Polymer('age-slider', {
+      age: 25,
+      name: "Daniel",
+      color: "blue",
+      owner: "Eric",
+      // publish:{
+      //   hidden: {
+      //     value: false,
+      //     reflect: true //反射
+      //   }
+      // },
+      nameChanged: function(oldValue, newValue) {
+        if (this.name) {
+        // Ensure name is capitalized
+          console.log(oldValue + " " + newValue);
+          this.name = this.name[0].toUpperCase() +
+                      this.name.slice(1);
+        }
+      },
+      created: function () { 
+        this.settings = {
+            color: "blue"
+        };
+        this.cancelUnbindAll();
+        console.log(this.color);
+        this.color = this.settings.color;
+        console.log(this.color);
+        console.log(name);
+
+      },
+
+      ready: function () {
+        console.log(this.color);
+        this.color = this.settings.color;//注意属性传递在ready时候才生效
+        console.log(this.name);
+      },
+    });
+</script>
+</polymer-element>
