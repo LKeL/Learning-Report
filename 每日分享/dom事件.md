@@ -42,7 +42,7 @@ window.addEventListener('click', function() {
 注意维护事件上下文，我倾向于使用`bind`来绑定
 
 
-##Event对象
+## Event对象
 
 Event对象在event第一次触发的时候被创建出来，并且一直伴随着事件在DOM结构中流转的整个生命周期。event对象会被作为第一个参数传递给事件监听的回调函数。我们可以通过这个event对象来获取到大量当前事件相关的信息：
 
