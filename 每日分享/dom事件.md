@@ -48,10 +48,10 @@ Event对象在event第一次触发的时候被创建出来，并且一直伴随�
 
 - `type (String)` — 事件的名称
 - `target (node)` — 事件起源的DOM节点
-- `currentTarget?(node)` — 当前回调函数被触发的DOM节点（后面会做比较详细的介绍）
-- `bubbles (boolean)` — 指明这个事件是否是一个冒泡事件（接下来会做解释）
+- `currentTarget?(node)` — 当前回调函数被触发的DOM节点
+- `bubbles (boolean)` — 指明这个事件是否是一个冒泡事件
 - `preventDefault(function)` — 这个方法将阻止浏览器中用户代理对当前事件的相关默认行为被触发。比如阻止`<a>`元素的click事件加载一个新的页面
-- `stopPropagation (function)` — 这个方法将阻止当前事件链上后面的元素的回调函数被触发，当前节点上针对此事件的其他回调函数依然会被触发。（我们稍后会详细介绍。）
+- `stopPropagation (function)` — 这个方法将阻止当前事件链上后面的元素的回调函数被触发，当前节点上针对此事件的其他回调函数依然会被触发。
 - `stopImmediatePropagation (function)` — 这个方法将阻止当前事件链上所有的回调函数被触发，也包括当前节点上针对此事件已绑定的其他回调函数。
 - `cancelable (boolean)` — 这个变量指明这个事件的默认行为是否可以通过调用`event.preventDefault`来阻止。也就是说，只有`cancelable`为`true`的时候，调用`event.preventDefault`才能生效。
 - `defaultPrevented (boolean)` — 这个状态变量表明当前事件对象的`preventDefault`方法是否被调用过
