@@ -1,0 +1,119 @@
+## 2017-11-14前端学习周报  
+### 1.koa中间件原理  
+
+最近学了一下node.js的Web框架koa，而koa的核心部分是它的中间件，这些中间件函数基于 request 请求以一个类似于栈的结构组成并依次执行。  
+先看一个例子  
+```javascript
+var koa = require('koa');
+var app = koa();
+
+// middleware1
+
+app.use(function *(next){
+  console.log('middleware1 begin')
+  yield next;
+  console.log('middleware1 end')
+});
+
+// middleware2
+
+app.use(function *(next){
+  console.log('middleware2 begin')
+  yield next;
+  console.log('middleware2 end')
+});
+
+// middleware3
+
+app.use(function *(){
+  console.log('middleware3')
+});
+
+app.listen(3000);
+//运行结果：middleware1 begin ＝> middleware2 begin => middleware3 => middleware2 end => middleware1 end
+```
+可以看到请求先经过中间件1，在遇到yield next的时候，函数执行交给了中间件2，又遇到了yield next，函数执行交给了中间件3，此时没有遇到yield next，程序栈会逆序唤起被挂起的中间件来执行接下来的代码。  
+koa中间件是基于tj大神的co函数，而co函数的用处就是Generator函数的自动执行。  
+```javascript
+// 读取文件
+function *readfileGenerator() {
+    var text = yield new Promise(function(resolve){
+        fs.readFile('./index.html', 'utf-8', function(err, data){
+            resolve(data);
+        })
+    });
+}
+var r = readfileGenerator();
+
+r.next().value.then(function(data){
+  r.next(data);
+})
+//这里的Generator需要手动执行，而我们可以实现一个简单的执行h函数去自动执行它
+
+function run(gen){
+  var g = gen();
+
+  function next(data){
+    var result = g.next(data);
+    if (result.done) {
+        return result.value;
+    }
+    result.value.then(function(data){
+      next(data);
+    });
+  }
+
+  next();
+}
+run(readfileGenerator);
+```
+其实koa的每一个中间件都是一个Generator函数，use方法就是队列中push进一个中间件，然后把队列传给co函数顺序执行。  
+koa2中吧generator函数换成了async/await函数，基本的原理是相似的。
+### 参考资料  
+[es6基础](http://es6.ruanyifeng.com/)  
+
+[async/await](http://www.ruanyifeng.com/blog/2015/05/async.html)   
+****
+
+### 2.如何发布node模块到npm社区  
+1.先去[https://www.npmjs.com](https://www.npmjs.com)注册一个帐号  
+2.你至少要有个index.js吧  
+```javascript
+//index.js
+module.exports = function () {
+    console.log('hello world')
+}
+```  
+3.建立你的package.json  
+```
+$ npm init
+```  
+#### packge.json的主要内容
+* name：
+模块名，之后发布之后就可以让用户npm install xxxx来引用你的开源模块了
+* version：
+版本号，语义版本号分为X.Y.Z三位，分别代表主版本号、次版本号和补丁版本号。当代码变更时，版本号按以下原则更新。
+如果只是修复bug，需要更新Z位。
+如果是新增了功能，但是向下兼容，需要更新Y位。
+如果有大变动，向下不兼容，需要更新X位。
+
+* main：入口文件，必要，当通过require('xxx')时，是读取main里声明的文件
+
+4.在本地登陆你的npm帐号  
+```
+$ npm login
+```  
+5.发布你的模块  
+```
+$ npm publish 
+//返回下面的信息就是发布成功了 
++ 模块名字@版本
+如 
++ xxx@0.0.1 
+```  
+然后你就可以npm install你的模块看效果辣  
+```javascript
+const xxx = require('xxx')
+xxx()  //'hello world'
+
+```
